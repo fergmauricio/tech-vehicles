@@ -1,0 +1,16 @@
+node_modules
+dist
+.tmp
+.cache
+coverage
+logs
+.git
+.gitignore
+.env*
+**/.turbo
+**/coverage
+**/.next
+**/*.log
+
+Dockerfile
+docker-compose.yml
