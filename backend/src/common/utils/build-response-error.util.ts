@@ -5,6 +5,7 @@ export const buildErrorResponse = (
   message: string,
   errors: { message: string }[] | null,
   path: string,
+  correlationId: string,
 ) => ({
   success: false,
   errorCode,
@@ -12,4 +13,5 @@ export const buildErrorResponse = (
   errors,
   timestamp: new Date().toISOString(),
   path,
+  correlationId,
 });

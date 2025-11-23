@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { ErrorCodes } from "../enums/error-codes.enum";
 import type { ExceptionResponse } from "../types/exception-response";
 import { buildErrorResponse } from "../utils/build-response-error.util";
+import { AppLogger } from "../logger/app.logger";
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -43,6 +44,19 @@ export class HttpExceptionFilter implements ExceptionFilter {
       }
     }
 
-    response.status(status).json(buildErrorResponse(errorCode, message, errors, request.url));
+    const correlationId = request.correlationId || "";
+
+    AppLogger.error("Captura de Erro", {
+      status,
+      message,
+      errorCode,
+      errors,
+      path: request.url,
+      correlationId,
+    });
+
+    response
+      .status(status)
+      .json(buildErrorResponse(errorCode, message, errors, request.url, correlationId));
   }
 }

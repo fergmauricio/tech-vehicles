@@ -8,7 +8,8 @@ export class ResponseInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
     const path = request.url;
+    const correlationId = request.correlationId;
 
-    return next.handle().pipe(map((data) => buildSuccessResponse(data, path)));
+    return next.handle().pipe(map((data) => buildSuccessResponse(data, path, correlationId)));
   }
 }
