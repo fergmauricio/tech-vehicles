@@ -4,11 +4,15 @@ import { CreateVehicleDto } from "./dto/create-vehicle.dto";
 import { UpdateVehicleDto } from "./dto/update-vehicle.dto";
 import type { VehicleRepository } from "./repositories/vehicle.repository";
 
+import { VehicleEvents } from "../../../shared/events/vehicle-events.enum";
+import { VehicleEventsPublisher } from "./events/vehicle-event.publisher";
+
 @Injectable()
 export class VehiclesService {
   constructor(
     @Inject("VehicleRepository")
     private readonly repo: VehicleRepository,
+    private readonly publisher: VehicleEventsPublisher,
   ) {}
 
   async create(dto: CreateVehicleDto) {
@@ -21,7 +25,11 @@ export class VehiclesService {
     if (await this.repo.existsByChassi(dto.chassi))
       throw new BadRequestException("Chassi já cadastrado.");
 
-    return this.repo.create(dto);
+    const vehicle = await this.repo.create(dto);
+
+    await this.publisher.publish(VehicleEvents.CREATED, vehicle);
+
+    return vehicle;
   }
 
   async findAll() {
@@ -38,12 +46,19 @@ export class VehiclesService {
     const exists = await this.repo.findById(id);
     if (!exists) throw new NotFoundException("Veículo não encontrado.");
 
-    return this.repo.update(id, dto);
+    const updated = await this.repo.update(id, dto);
+
+    await this.publisher.publish(VehicleEvents.UPDATED, updated);
+
+    return updated;
   }
 
   async remove(id: string) {
     const ok = await this.repo.delete(id);
     if (!ok) throw new NotFoundException("Veículo não encontrado.");
+
+    await this.publisher.publish(VehicleEvents.DELETED, { id });
+
     return { deleted: true };
   }
 }
