@@ -5,7 +5,6 @@ import { DatabaseModule } from "./database/database.module";
 import { ConfigModule } from "@nestjs/config";
 import { VehiclesModule } from "./vehicles/vehicles.module";
 import { HealthModule } from "./health/health.module";
-import { MessagingModule } from "./messaging/messaging.module";
 import { RabbitMQGlobalModule } from "./broker/rabbitmq-global.module";
 
 @Module({
@@ -18,7 +17,6 @@ import { RabbitMQGlobalModule } from "./broker/rabbitmq-global.module";
     DatabaseModule,
     VehiclesModule,
     HealthModule,
-    MessagingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
