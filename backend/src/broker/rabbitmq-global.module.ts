@@ -10,12 +10,8 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         uri: config.get<string>("RABBITMQ_URL") || "",
-        exchanges: [
-          {
-            name: "vehicles.exchange",
-            type: "topic",
-          },
-        ],
+
+        exchanges: [{ name: "vehicles.exchange", type: "topic" }],
       }),
     }),
   ],
