@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { RabbitSubscribe } from '@golevelup/nestjs-rabbitmq';
-import { VehicleEvents } from './vehicle-events.enum';
+import { VehicleEvents } from './events/vehicle-events.enum';
+import { VehicleEventDTO } from './events/vehicle-event.dto';
 
 @Injectable()
 export class VehicleConsumerService {
@@ -9,16 +10,16 @@ export class VehicleConsumerService {
     routingKey: VehicleEvents.CREATED,
     queue: 'vehicle_created_queue',
   })
-  async handleVehicleCreated(message: any) {
-    console.log('[VEHICLE-WORKER] Veículo criado: ', message);
+  async handleVehicleCreated(message: VehicleEventDTO) {
+    console.log('[VEHICLE-WORKER] Veículo criado:', message);
   }
 
   @RabbitSubscribe({
     exchange: 'vehicles.exchange',
     routingKey: VehicleEvents.UPDATED,
-    queue: 'vehicles_updated_queue',
+    queue: 'vehicle_updated_queue',
   })
-  async handleUpdated(msg: any) {
+  async handleUpdated(msg: VehicleEventDTO) {
     console.log('[VEHICLE-WORKER] Veículo atualizado:', msg);
   }
 
@@ -27,7 +28,7 @@ export class VehicleConsumerService {
     routingKey: VehicleEvents.DELETED,
     queue: 'vehicle_deleted_queue',
   })
-  async handleDeleted(msg: any) {
+  async handleDeleted(msg: VehicleEventDTO) {
     console.log('[VEHICLE-WORKER] Veículo excluído:', msg);
   }
 }
