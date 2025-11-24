@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { VehicleConsumerModule } from './consumers/vehicle-consumer.module';
-import { RabbitMQGlobalModule } from './broker/rabbitmq.module';
+import { RabbitMQGlobalModule } from './broker/rabbitmq-worker.module';
 
 @Module({
   imports: [
