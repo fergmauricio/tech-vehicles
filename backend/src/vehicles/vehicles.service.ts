@@ -4,8 +4,8 @@ import { CreateVehicleDto } from "./dto/create-vehicle.dto";
 import { UpdateVehicleDto } from "./dto/update-vehicle.dto";
 import type { VehicleRepository } from "./repositories/vehicle.repository";
 
-import { VehicleEvents } from "../../../shared/events/vehicle-events.enum";
 import { VehicleEventsPublisher } from "./events/vehicle-event.publisher";
+import { VehicleEvents } from "./events/vehicle-events.enum";
 
 @Injectable()
 export class VehiclesService {

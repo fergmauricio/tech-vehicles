@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { AmqpConnection } from "@golevelup/nestjs-rabbitmq";
-import { VehicleEvents } from "../../../../shared/events/vehicle-events.enum";
+
 import { VehicleEventPayload } from "./vehicle-event.payload";
+import { VehicleEvents } from "./vehicle-events.enum";
 
 @Injectable()
 export class VehicleEventsPublisher {

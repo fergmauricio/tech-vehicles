@@ -1,4 +1,4 @@
-import { VehicleEvents } from "../../../../shared/events/vehicle-events.enum";
+import { VehicleEvents } from "./vehicle-events.enum";
 
 export interface VehicleEventPayload<data = any> {
   metadata: {
