@@ -1,15 +1,15 @@
 import { Injectable } from "@nestjs/common";
 import { AmqpConnection } from "@golevelup/nestjs-rabbitmq";
 
-import { VehicleEventPayload } from "./vehicle-event.payload";
 import { VehicleEvents } from "./vehicle-events.enum";
+import { VehicleEventDTO } from "./dto/vehicle-event.dto";
 
 @Injectable()
 export class VehicleEventsPublisher {
   constructor(private readonly amqp: AmqpConnection) {}
 
   async publish(event: VehicleEvents, data: any) {
-    const payload: VehicleEventPayload = {
+    const payload: VehicleEventDTO = {
       metadata: {
         event,
         timestamp: new Date().toISOString(),
