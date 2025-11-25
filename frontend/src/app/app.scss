@@ -1,0 +1,62 @@
+/* Layout base */
+.app-layout {
+  min-height: 100vh;
+  background: #f5f7fa;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  background: #1976d2;
+  color: white;
+  padding: 14px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand .logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Links do menu */
+.navbar-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #e9efff;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.navbar-links a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.navbar-links .active {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* Conteúdo */
+.content {
+  padding: 24px;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.external-link {
+  color: #1976d2;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.external-link:hover {
+  text-decoration: underline;
+}
