@@ -1,59 +1,59 @@
-# Frontend
+# Tech Vehicles – Sistema de Gestão de Veículos (Frontend + Backend + Worker)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+Este projeto é a minha participação em um teste técnico de gerenciamento de veículos da Info Tecnologia, composto por:
 
-## Development server
+- Backend (NestJS) — responsável pelas APIs, regras de negócio e publicação de eventos.
+- Frontend (Angular) - responsável pela listagem de Veículos cadastrados.
+- Vehicle Worker (NestJS) — responsável por consumir eventos via RabbitMQ para processamento assíncrono.
+- MongoDB para persistência de dados.
+- RabbitMQ como broker de mensagens.
+- Toda a infraestrutura é executável via Docker Compose.
 
-To start a local development server, run:
+### Instalação e Execução (via Docker)
 
-```bash
-ng serve
+Pré-requisitos
+
+- Docker
+
+## 1. Subir toda a stack
+
+Na raiz do projeto:
+
+```
+docker compose up -d --build
+
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 2. Renomear arquivos .env.example
 
-## Code scaffolding
+Como não há dados sensíveis, basta apenas renomear os arquivos.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+```
+Renomeie os arquivos .env.example para .env (dentro de /backend e dentro de /vehicle-worker)
 
-```bash
-ng generate component component-name
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 3. Ver logs
 
-```bash
-ng generate --help
+```
+docker logs -f vehicles-backend
+docker logs -f vehicles-worker
 ```
 
-## Building
+# Para Visualizar a listagem de veículos no Frontend
 
-To build the project run:
+Após subir o docker, acesse:
 
-```bash
-ng build
+```
+http://localhost:4200/vehicles
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+# Para testar endpoints da API (Swagger)
 
-## Running unit tests
+Após subir o ambiente:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Swagger disponível com todos endpoints em:
 
-```bash
-ng test
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+http://localhost:3000/api/docs
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
