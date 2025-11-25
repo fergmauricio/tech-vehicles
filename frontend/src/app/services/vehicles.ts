@@ -23,7 +23,8 @@ interface VehiclesResponse {
 @Injectable({ providedIn: 'root' })
 export class VehiclesService {
   private http = inject(HttpClient);
-  private API_URL = 'http://localhost:3000/api/v1';
+  //private API_URL = 'http://localhost:3000/api/v1';
+  private API_URL = '/api/v1';
 
   list(): Observable<Vehicle[]> {
     return this.http.get<VehiclesResponse>(`${this.API_URL}/vehicles`).pipe(map((res) => res.data));

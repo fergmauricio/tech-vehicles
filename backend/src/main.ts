@@ -13,7 +13,11 @@ async function bootstrap() {
   app.setGlobalPrefix("api/v1");
   app.use(CorrelationIdMiddleware);
 
-  app.enableCors();
+  app.enableCors({
+    origin: ["http://localhost:4200", "http://127.0.0.1:4200"],
+    methods: "GET,POST,PUT,DELETE,OPTIONS",
+    credentials: true,
+  });
 
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new LoggingInterceptor());
