@@ -15,21 +15,21 @@ Pré-requisitos
 
 - Docker
 
-## 1. Subir toda a stack
-
-Na raiz do projeto:
-
-```
-docker compose up -d --build
-
-```
-
-## 2. Renomear arquivos .env.example
+## 1. Renomear arquivos .env.example
 
 Como não há dados sensíveis, basta apenas renomear os arquivos.
 
 ```
 Renomeie os arquivos .env.example para .env (dentro de /backend e dentro de /vehicle-worker)
+
+```
+
+## 2. Subir toda a stack
+
+Na raiz do projeto:
+
+```
+docker compose up -d --build
 
 ```
 
